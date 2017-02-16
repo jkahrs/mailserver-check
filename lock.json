@@ -1,0 +1,37 @@
+{
+    "memo": "3c06aca4fafe151e7cb2a7c264631d7bff67743b1ce308ec8a9e77472ceef363",
+    "projects": [
+        {
+            "name": "github.com/howeyc/gopass",
+            "branch": "master",
+            "revision": "bf9dde6d0d2c004a008c27aaee91170c786f6db8",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/skratchdot/open-golang",
+            "branch": "master",
+            "revision": "75fb7ed4208cf72d323d7d02fd1a5964a7a9073c",
+            "packages": [
+                "open"
+            ]
+        },
+        {
+            "name": "golang.org/x/crypto",
+            "branch": "master",
+            "revision": "453249f01cfeb54c3d549ddb75ff152ca243f9d8",
+            "packages": [
+                "ssh/terminal"
+            ]
+        },
+        {
+            "name": "golang.org/x/sys",
+            "branch": "master",
+            "revision": "e24f485414aeafb646f6fca458b0bf869c0880a1",
+            "packages": [
+                "unix"
+            ]
+        }
+    ]
+}

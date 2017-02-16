@@ -1,0 +1,10 @@
+{
+    "dependencies": {
+        "github.com/howeyc/gopass": {
+            "branch": "master"
+        },
+        "github.com/skratchdot/open-golang": {
+            "branch": "master"
+        }
+    }
+}

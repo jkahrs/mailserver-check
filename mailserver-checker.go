@@ -16,14 +16,12 @@ import (
 
 // Settings stores the credentials to be tested
 type Settings struct {
-	Benutzername string
-	Passwort     string
-	Server       string
+	Username string
+	Password string
+	Server   string
 }
 
-/*
-	Appends timestaps + Log MSGs into a file
-*/
+// Appends timestaps + Log MSGs into a file
 func writeLog(text string) {
 	f, _ := os.OpenFile(logFile, os.O_APPEND|os.O_WRONLY, 0600)
 	// f.. microsoft
@@ -33,14 +31,12 @@ func writeLog(text string) {
 	defer f.Close()
 }
 
-/*
-	Attempts SMTP Login at given server
-*/
+// Attempts SMTP Login at given server
 func testSMTPPlain(cfg Settings) (success bool, err error) {
 	auth := smtp.PlainAuth(
 		"",
-		cfg.Benutzername,
-		cfg.Passwort,
+		cfg.Username,
+		cfg.Password,
 		cfg.Server,
 	)
 	success = true
@@ -71,10 +67,8 @@ func testSMTPPlain(cfg Settings) (success bool, err error) {
 	return success, err
 }
 
-/*
-	Wait for user interaction to finish execution
-	and return the correct exit code
-*/
+//	Wait for user interaction to finish execution
+//	and return the correct exit code
 func endProgram(code int) {
 	logTxt := "[ Info ] Tests finished."
 	log.Println(logTxt)
@@ -92,16 +86,15 @@ var (
 )
 
 func init() {
-	/*
-		Create a logfile for later
-	*/
+
+	// Create a logfile for later
 	F, err := os.Create(logFile)
 	if err != nil {
 		log.Println("[ Fatal ] Failed to create logfile.")
 		endProgram(1)
 	}
 	defer F.Close()
-	writeLog("Bitte senden Sie die folgenden Daten an unseren Support:\r\n\r\n")
+	writeLog("Please send the following log data to your administrator:\r\n\r\n")
 
 	log.Println("[ Info ] Mailserver check started.")
 }
@@ -113,13 +106,13 @@ func main() {
 	*/
 	var cfg Settings
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Ihre E-Mail Adresse: ")
-	cfg.Benutzername, _ = reader.ReadString('\n')
-	cfg.Benutzername = strings.TrimSpace(cfg.Benutzername)
-	fmt.Print("Ihr Kennwort: ")
+	fmt.Print("E-Mail Adress: ")
+	cfg.Username, _ = reader.ReadString('\n')
+	cfg.Username = strings.TrimSpace(cfg.Username)
+	fmt.Print("Password: ")
 	stin, _ := gopass.GetPasswd()
-	cfg.Passwort = string(stin)
-	cfg.Passwort = strings.TrimSpace(cfg.Passwort)
+	cfg.Password = string(stin)
+	cfg.Password = strings.TrimSpace(cfg.Password)
 	fmt.Print("Mailserver: ")
 	cfg.Server, _ = reader.ReadString('\n')
 	cfg.Server = strings.TrimSpace(cfg.Server)

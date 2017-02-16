@@ -4,15 +4,17 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"github.com/howeyc/gopass"
-	"github.com/skratchdot/open-golang/open"
 	"log"
 	"net/smtp"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/howeyc/gopass"
+	"github.com/skratchdot/open-golang/open"
 )
 
+// Settings stores the credentials to be tested
 type Settings struct {
 	Benutzername string
 	Passwort     string
@@ -34,7 +36,7 @@ func writeLog(text string) {
 /*
 	Attempts SMTP Login at given server
 */
-func testSmtpPlain(cfg Settings) (success bool, err error) {
+func testSMTPPlain(cfg Settings) (success bool, err error) {
 	auth := smtp.PlainAuth(
 		"",
 		cfg.Benutzername,
@@ -115,7 +117,8 @@ func main() {
 	cfg.Benutzername, _ = reader.ReadString('\n')
 	cfg.Benutzername = strings.TrimSpace(cfg.Benutzername)
 	fmt.Print("Ihr Kennwort: ")
-	cfg.Passwort = string(gopass.GetPasswd())
+	stin, _ := gopass.GetPasswd()
+	cfg.Passwort = string(stin)
 	cfg.Passwort = strings.TrimSpace(cfg.Passwort)
 	fmt.Print("Mailserver: ")
 	cfg.Server, _ = reader.ReadString('\n')
@@ -129,7 +132,7 @@ func main() {
 		perform Smtp Plain login check
 		ToDo: Perform more checks
 	*/
-	_, err := testSmtpPlain(cfg)
+	_, err := testSMTPPlain(cfg)
 	if err != nil {
 		log.Println(err.Error())
 		endProgram(1)

@@ -1,7 +1,0 @@
-Thu Apr 23 16:15:25 2015 Bitte senden Sie die folgenden Daten an unseren Support:
-
-
-Thu Apr 23 16:15:36 2015 [ Info ] Beginning Tests..
-Thu Apr 23 16:15:36 2015 [ Info ] Testing SMTP Auth Plain: mail.twooit.com:25
-Thu Apr 23 16:15:38 2015 [ Fatal ] SMTP Auth Plain: 535 5.7.8 Error: authentication failed: 
-Thu Apr 23 16:15:38 2015 [ Info ] Tests finished.
